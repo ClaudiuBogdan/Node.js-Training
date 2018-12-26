@@ -1,0 +1,31 @@
+{
+  "name": "resful-api",
+  "version": "1.0.0",
+  "description": "My first version of RESTful API created with node.js ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClaudiuBogdan/Node.js-Training.git"
+  },
+  "keywords": [
+    "Node.js",
+    "JavaScript",
+    "RESTful",
+    "CRUD"
+  ],
+  "author": "Claudiu Constantin Bogdan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClaudiuBogdan/Node.js-Training/issues"
+  },
+  "homepage": "https://github.com/ClaudiuBogdan/Node.js-Training#readme",
+  "dependencies": {
+    "eslint": "^5.11.0",
+    "export": "^0.1.337",
+    "express": "^4.16.4"
+  }
+}
