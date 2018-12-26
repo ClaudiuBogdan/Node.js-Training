@@ -5,13 +5,14 @@ const app = express();
 
 app.use(express.json());
 // app.use(express.bodyParser());
+let id = 0;
 const toolsAvailable = [
     {
-        id : 1,
+        id : id++,
         name: 'Hammer'
     },
     {
-        id: 2,
+        id: id++,
         name: 'Scrwedriver'
     }
 ];
@@ -25,7 +26,7 @@ app.get('/api/general', (req, res) => {
 });
 
 app.get('/api/tools', (req, res) => {
-    res.send({arr: [1, 2, 3]});
+    res.send(toolsAvailable);
 });
 
 app.get('/api/tools/:id', (req, res) => {
@@ -48,7 +49,7 @@ app.post('/api/tools', (req, res) => {
     
     //Item creation
     const tool = {
-        id: toolsAvailable.length + 1,
+        id: id++,
         name: req.body.name
     }
     toolsAvailable.push(tool);
@@ -70,6 +71,19 @@ app.put('/api/tools/:id', (req, res) => {
     
     tool.name = req.body.name;
     res.send(tool);
+});
+
+app.delete('/api/tools/:id', (req, res) => {
+    const tool = toolsAvailable.find( c => c.id === parseInt(req.params.id));
+    if(!tool) {
+        res.status(404).send('Resource not found');
+        return;
+    }
+
+    const index = toolsAvailable.indexOf(tool);
+    toolsAvailable.splice(index, 1);
+
+    res.send("Deleted succesfuly. Index: " + index);
 });
 
 const validateTool = (tool) => {
