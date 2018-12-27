@@ -15,7 +15,7 @@ const toolsSchema = new mongoose.Schema({
     isAvailable: Boolean
 });
 
-const Tool = mongoose.model('ToolsCollection', toolsSchema);
+const Tools = mongoose.model('ToolsCollection', toolsSchema);
 
 // async function createTool(){
 //     const tool = new Tool({
@@ -33,7 +33,7 @@ async function getTool(){
     //ne (not equal)
     //...
 
-    const tools =  await Tool.find()
+    const tools =  await Tools.find()
         .sort({name: 1})
         .select({
                 name: 1,
@@ -44,12 +44,12 @@ async function getTool(){
 }
 
 async function updateTool(id){
-    const updatedTool = await Tool.findById(id);
-    if(!updatedTool) return;
+    const tool = await Tools.findById(id);
+    if(!tool) return;
 
-    updatedTool.name = "Updated Tool";
-    updatedTool.cost = 1;
-    return await updatedTool.save();
+    tool.name = "Updated Tool";
+    tool.cost = 1;
+    return await tool.save();
     
 };
 
