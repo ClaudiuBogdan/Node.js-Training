@@ -4,7 +4,7 @@
   "description": "My first full stack application. Social network alike web app.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js ",
     "server": "nodemon server.js"
   },
   "author": "Claudiu Constantin Bogdan",
@@ -12,6 +12,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "gravatar": "^1.8.0",
     "joi": "^14.3.1",

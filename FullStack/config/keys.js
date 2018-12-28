@@ -1,5 +1,4 @@
 module.exports = {
-    mongoURI:
-        'mongodb://localhost/fullstack',
-    secretKey: 'sdAS1@211wd.,s1!Ad1'
-}
+  mongoURI: "mongodb://localhost/fullstack",
+  secretKey: process.env.secretOrKey
+};
