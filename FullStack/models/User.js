@@ -26,7 +26,7 @@ const UserSchema = new Schema({
     },
 });
 
-function validateUser(user) {
+function validateUserRegister(user) {
     const schema = {
         name: Joi.string().min(5).max(32).required(),
         email: Joi.string().min(5).max(32).required().email(),
@@ -35,5 +35,14 @@ function validateUser(user) {
     return Joi.validate(user, schema);
 }
 
+function validateUserLogin(user) {
+    const schema = {
+        email: Joi.string().min(5).max(32).required().email(),
+        password: Joi.string().min(5).max(32).required(),
+    }
+    return Joi.validate(user, schema);
+}
+
 exports.User = mongoose.model('users', UserSchema);
-exports.validate = validateUser;
+exports.validateRegister = validateUserRegister;
+exports.validateLogin = validateUserLogin;
