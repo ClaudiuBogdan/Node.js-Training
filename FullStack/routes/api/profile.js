@@ -117,14 +117,14 @@ router.post(
     });
     if (error) return res.status(400).json({ error: error.details[0].message });
     //Check if profile exists //Update profile
-    Profile.findOneAndUpdate(
-      { user: req.user._id },
-      { $set: { experience } },
-      { new: true }
-    )
+    Profile.findOne({ user: req.user._id })
       .then(profile => {
         if (profile) {
-          res.json({ success: profile });
+          profile.experience = profile.experience.concat(experience);
+          profile
+            .save()
+            .then(updatedProfile => res.json({ success: updatedProfile }))
+            .catch(error => res.status(500).json(error));
         } else {
           res.status(404).json({ error: "Profile not found!" });
         }
