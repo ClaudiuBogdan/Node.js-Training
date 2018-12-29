@@ -4,7 +4,12 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 //Load Profile Model
-const { Profile, validateProfile } = require("../../models/Profile");
+const {
+  Profile,
+  validateProfile,
+  validateProfileExperience,
+  validateProfileEducation
+} = require("../../models/Profile");
 //Load User Model
 const { User } = require("../../models/User");
 
@@ -84,7 +89,7 @@ router.post(
         //Check if handle exists
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
-            errMsg = "That handle already esists";
+            errMsg = "That handle already exists";
             res.status(400).json(errMsg);
           }
 
@@ -93,6 +98,38 @@ router.post(
         });
       }
     });
+  }
+);
+
+//@route    POST api/profile/experience
+//@desc     Add experience to profile
+//@access   Private
+router.post(
+  "/experience",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    //Validate education data
+    const experience = JSON.parse(req.body.experience);
+    if (!experience)
+      return res.status(400).json({ error: "No experience provided!" });
+    const { error } = validateProfileExperience({
+      experience
+    });
+    if (error) return res.status(400).json({ error: error.details[0].message });
+    //Check if profile exists //Update profile
+    Profile.findOneAndUpdate(
+      { user: req.user._id },
+      { $set: { experience } },
+      { new: true }
+    )
+      .then(profile => {
+        if (profile) {
+          res.json({ success: profile });
+        } else {
+          res.status(404).json({ error: "Profile not found!" });
+        }
+      })
+      .catch(error => res.status(500).json(error));
   }
 );
 

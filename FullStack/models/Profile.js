@@ -161,5 +161,36 @@ function validateProfile(profile) {
   return Joi.validate(profile, schema);
 }
 
+function validateProfileExperience(expereinceItems) {
+  const experiencItemsSchema = Joi.object().keys({
+    title: Joi.string().required(),
+    company: Joi.string().required(),
+    location: Joi.string(),
+    from: Joi.date().required(),
+    to: Joi.date(),
+    current: Joi.bool()
+  });
+  const experienceSchema = {
+    experience: Joi.array().items(experiencItemsSchema)
+  };
+  return Joi.validate(expereinceItems, experienceSchema);
+}
+
+function validateProfileEducation(educationItems) {
+  const educationItemsSchema = Joi.object().keys({
+    school: Joi.string().required(),
+    degree: Joi.string().required(),
+    fieldofstudy: Joi.string().required(),
+    from: Joi.date().required(),
+    to: Joi.date(),
+    current: Joi.bool()
+  });
+  const educationSchema = Joi.object().keys({
+    experience: Joi.array().items(educationItemsSchema)
+  });
+  return Joi.validate(educationItems, educationSchema);
+}
 exports.Profile = mongoose.model("profile", ProfileSchema);
 exports.validateProfile = validateProfile;
+exports.validateProfileExperience = validateProfileExperience;
+exports.validateProfileEducation = validateProfileEducation;
