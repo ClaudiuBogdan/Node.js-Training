@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <header>
+    <title>Testing forms</title> <link rel="stylesheet" href="styles.css" />
+  </header>
+  <body>
+    <h1>Hi there! I'm going to test form elements with back-end support.</h1>
+    <p>Insert your form here</p>
+    <div>
+      <p>Form....</p>
+      <form action="/test-form" method="POST">
+        <label for="name">
+          <input
+            type="text"
+            id="name"
+            placeholder="Your name"
+            name="name"
+            required
+          />
+        </label>
+        <div id="multiple-options">
+          <p>How do you feel today?</p>
+          <label for="bad">
+            <input type="radio" id="bad" name="feeling" value="bad" />I'm
+            feeling bad.
+          </label>
+          <label for="normal">
+            <input type="radio" id="normal" name="feeling" value="normal" />I'm
+            feeling normal.
+          </label>
+          <label for="good">
+            <input type="radio" id="good" name="feeling" value="good" />I'm
+            feeling good.
+          </label>
+        </div>
+        <div id="check-options">
+          <p>How do you want to feel?</p>
+          <label for="ok">
+            <input
+              type="checkbox"
+              id="ok"
+              name="intended_feeling"
+              value="ok"
+            />I want to feel ok.
+          </label>
+          <label for="cool">
+            <input
+              type="checkbox"
+              id="cool"
+              name="intended_feeling"
+              value="cool"
+            />I want to feel cool.
+          </label>
+
+          <label for="super">
+            <input
+              type="checkbox"
+              id="super"
+              name="intended_feeling"
+              value="super"
+            />I want to feel super cool.
+          </label>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
